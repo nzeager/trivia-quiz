@@ -5,17 +5,24 @@ import { useState } from 'react'
 import axios from 'axios'
 
 function App() {
+  const [quiz, setQuiz] = useState(false)
+
   return (
     <>
       <h1>Trivia Game</h1>
-      <DisplayCategories />
-      
+      <ContentDisplay quiz={quiz} setQuiz={setQuiz} />
     </>
   );
 }
 
+const ContentDisplay = ({quiz, setQuiz}) => {
+  if (!quiz) {
+    return(<DisplayCategories setQuiz={setQuiz} />)
+  }
+  return(<TakeQuiz setQuiz={setQuiz} />)
+}
 
-const DisplayCategories = () => {
+const DisplayCategories = ({setQuiz}) => {
   const [categories, setCategories] = useState([])
 
   useEffect(() => {
@@ -29,9 +36,19 @@ const DisplayCategories = () => {
       <div className='cat-list'>
         {console.log(categories)}
         {categories.map((cat) => (
-          <div><button key={cat.id}> {cat.name} </button></div>
+          <div><button key={cat.id} onClick={() => {setQuiz(true)}}> {cat.name} </button></div>
+          // <div><button key={cat.id}> {cat.name} </button></div>
         ))}
       </div>
+    </>
+  )
+}
+
+const TakeQuiz = ({setQuiz}) => {
+  return(
+    <>
+      <p>Here's the quiz page</p>
+      <div><button onClick={() => {setQuiz(false)}}> Return to Categories </button></div>
     </>
   )
 }
