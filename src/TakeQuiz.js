@@ -1,10 +1,10 @@
 import { useEffect } from 'react'
 import { useState } from 'react'
 import axios from 'axios'
+import { DisplayQuestion } from './DisplayQuestion'
+import { DisplayResults } from './DisplayResults'
 
 export const TakeQuiz = ({catID, setCatID}) => {
-    // Maybe set up a useState to track when quiz is ongoing vs finished (to display results)
-  
     // tracks the list of questions in the quiz
     const [questions, setQuestions] = useState([])
   
@@ -23,55 +23,26 @@ export const TakeQuiz = ({catID, setCatID}) => {
     if (questions.length > 0) {
         let len = questions.length
         let category = questions[0].category
-
-        
-        
-        // let correctIndex = options.findIndex(questions[questIndex].correct_answer)
         
         if (questIndex < len) {
-            let question = questions[questIndex].question
-            let correctAnswer = questions[questIndex].correct_answer
-    
-            let options=[]
-            options=[...questions[questIndex].incorrect_answers,questions[questIndex].correct_answer]
             return(
-                <>
-                    <div className='title'> 
-                        {category} Quiz 
-                    </div>
-                    <div className='score'>
-                        Score: {score}
-                    </div>
-                    <div className='question'> 
-                        Question {questIndex+1}: {question}
-                    </div>
-                    {options.map((option) => (
-                        <div onClick={() => {
-                            setQuestIndex(questIndex+1);
-                            (option === correctAnswer) ? setScore(score + 1) : setScore(score);
-                        }}> 
-                            {option}
-                        </div>
-                    ))}
-                    <div>
-                        <button onClick={() => {setCatID(null)}}> Return to Categories </button>
-                    </div>
-                    {console.log(questions)}
-                </>
+                <DisplayQuestion 
+                    setCatID={setCatID}
+                    questIndex={questIndex}
+                    setQuestIndex={setQuestIndex}
+                    score={score}
+                    setScore={setScore}
+                    questions={questions}
+                    category={category}
+                />
             )
         }
         return(
-            <>
-                <div className='title'> 
-                    {category} Quiz 
-                </div>
-                <div className='score'>
-                    Final Score: {score}
-                </div>
-                <div>
-                    <button onClick={() => {setCatID(null)}}> Return to Categories </button>
-                </div>
-            </>
+            <DisplayResults
+                setCatID={setCatID}
+                score={score}
+                category={category}
+            />
         )
     }
 }
