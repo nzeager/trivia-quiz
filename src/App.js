@@ -5,6 +5,7 @@ import {DisplayCategories} from './DisplayCategories'
 import {TakeQuiz} from './TakeQuiz'
 
 function App() {
+  // tracks the category ID # that the user selects
   const [catID, setCatID] = useState(null)
 
   return (
