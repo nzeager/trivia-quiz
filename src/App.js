@@ -11,16 +11,13 @@ function App() {
   return (
     <>
       <h1>Trivia Game</h1>
-      <ContentDisplay catID={catID} setCatID={setCatID} />
+      {
+        (!catID) 
+        ? <DisplayCategories setCatID={setCatID} /> 
+        : <TakeQuiz catID={catID} setCatID={setCatID} /> 
+      }
     </>
   );
-}
-
-const ContentDisplay = ({catID, setCatID}) => {
-  if (!catID) {
-    return(<DisplayCategories setCatID={setCatID} />)
-  }
-  return(<TakeQuiz catID={catID} setCatID={setCatID} />)
 }
 
 export default App;
