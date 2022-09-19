@@ -1,16 +1,15 @@
 import _ from 'lodash'
 import { useState } from 'react'
 import { DisplayFeedback } from './DisplayFeedback'
+import { htmlDecode } from './utils'
 
 export const DisplayQuestion = ({setCatID, questIndex, setQuestIndex, score, setScore, questions, category}) => {
 
     // tracks whether question has been answered to display feedback
     const [feedback, setFeedback] = useState(false)
 
-    // Fixes questions text output
-    const htmlDecode = input => new DOMParser()
-        .parseFromString(input, "text/html")
-        .documentElement.textContent
+    // tracks whether user answers question correctly
+    const [isCorrect, setIsCorrect] = useState('')
 
     let question = htmlDecode(questions[questIndex].question)
     let correctAnswer = questions[questIndex].correct_answer
@@ -19,14 +18,12 @@ export const DisplayQuestion = ({setCatID, questIndex, setQuestIndex, score, set
     options=[...questions[questIndex].incorrect_answers,questions[questIndex].correct_answer]
     let shuffleOptions = _.shuffle(options)
 
-    // tracks whether user answers question correctly
-    let status = ''
 
     // Determines what happens to states when clicking a correct/incorrect answer option
-    const checkAns = (option, correctAnswer) => {
+    const checkAns = (option, correctAnswer, setIsCorrect) => {
         if (option === correctAnswer) {
             setScore(score+1)
-            status='C'
+            setIsCorrect('C')
         }
         setFeedback(true)
     }
@@ -41,12 +38,12 @@ export const DisplayQuestion = ({setCatID, questIndex, setQuestIndex, score, set
             </div>
             <div className='options'>
                 {shuffleOptions.map((option) => (
-                    <button className='option' onClick={() => checkAns(option, correctAnswer)}>
+                    <button className='option' onClick={() => checkAns(option, correctAnswer, setIsCorrect)} disabled={feedback === true}>
                         {htmlDecode(option)}
                     </button>
                 ))}
             </div>
-            {(feedback === true) && <DisplayFeedback status={status} correctAnswer={correctAnswer} questIndex={questIndex} setQuestIndex={setQuestIndex} setFeedback={setFeedback} />}
+            {(feedback === true) && <DisplayFeedback isCorrect={isCorrect} setIsCorrect={setIsCorrect} correctAnswer={correctAnswer} questIndex={questIndex} setQuestIndex={setQuestIndex} setFeedback={setFeedback} />}
         </>
     )
 }

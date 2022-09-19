@@ -1,10 +1,7 @@
+import { htmlDecode } from './utils'
+
 export const DisplayResults = ({score, questions}) => {
     let questCount = 1;
-
-    // Fixes questions text output
-    const htmlDecode = input => new DOMParser()
-    .parseFromString(input, "text/html")
-    .documentElement.textContent
 
     return(
         <>
