@@ -1,38 +1,89 @@
-.App {
+body {
   text-align: center;
+  background-color: blanchedalmond;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.cat-list {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
-.App-link {
-  color: #61dafb;
+.category {
+  width: 17rem;
+  /* text-align: center; */
+  padding: 0.5rem 0 0.5rem 0;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.top-info {
+  display: grid;
+}
+
+.score {
+  text-align: right;
+  padding-right: 6rem;
+  font-weight: bold;
+}
+
+.question-label {
+  font-weight: bold;
+}
+
+.options {
+  padding: 0 0 0 35%;
+  display: grid;
+  grid-template-columns: 35% 30%;
+  justify-items: left;
+}
+
+.option {
+  margin-top: 1rem;
+}
+
+.feedback-correct {
+  font-weight: bold;
+  margin: 1rem;
+  color: green;
+}
+
+.feedback-incorrect {
+  font-weight: bold;
+  margin: 1rem;
+  color: red;
+}
+
+.correct-answer {
+  font-weight: bold;
+  margin: 1rem;
+}
+
+.next {
+  margin: 1rem;
+}
+
+.results-score {
+  font-weight: bold;
+  margin: 1rem;
+}
+
+.recap-label {
+  font-weight: bold;
+}
+
+.quest-ans {
+  margin: 1rem;
+}
+
+.answer-label {
+  font-weight: bold;
+}
+
+.bottom {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.quiz-options {
+  margin: 2rem;
 }

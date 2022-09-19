@@ -15,9 +15,8 @@ export const DisplayCategories = ({setCatID}) => {
         <h2>Select a Category</h2>
         <div className='cat-list'>
           {categories.map((cat) => (
-            <div key={`${cat.id} div`}>
+            <div key={cat.id} className='category'>
                 <button
-                    key={cat.id}
                     onClick={() => {setCatID(cat.id)}}
                 > {cat.name}
                 </button>

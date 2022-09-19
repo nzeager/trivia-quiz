@@ -13,7 +13,7 @@ export const TakeQuiz = ({catID, setCatID}) => {
 
     // tracks the list of questions in the quiz
     const [questions, setQuestions] = useState([])
-  
+
     useEffect(() => {
       // returns 10 mult choice questions with the requested category ID
       axios.get(`https://opentdb.com/api.php?amount=10&type=multiple&category=${catID}`).then((res) => setQuestions(res.data.results))
@@ -23,25 +23,29 @@ export const TakeQuiz = ({catID, setCatID}) => {
         let len = questions.length
         let category = questions[0].category
         
-        if (questIndex < len) {
-            return(
-                <DisplayQuestion 
+        return(
+            <>
+                <h2> 
+                    {category} Quiz 
+                </h2>
+                { (questIndex < len) 
+                    ? <DisplayQuestion 
                     setCatID={setCatID}
                     questIndex={questIndex}
                     setQuestIndex={setQuestIndex}
                     score={score}
                     setScore={setScore}
                     questions={questions}
-                    category={category}
-                />
-            )
-        }
-        return(
-            <DisplayResults
-                setCatID={setCatID}
-                score={score}
-                category={category}
-            />
+                    category={category} />
+                    : <DisplayResults
+                    score={score}
+                    questions={questions} />
+                }
+                <div className='bottom'>
+                    <button className='quiz-options' onClick={() => {setCatID(null)}}> Select New Quiz Category </button>
+                    <button className='quiz-options' onClick={() => <TakeQuiz catID={catID} setCatID={setCatID} />}> Start New {category} Quiz </button>
+                </div>
+            </>
         )
     }
 }

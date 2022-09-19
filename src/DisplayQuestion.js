@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import { useState } from 'react'
-import { DisplayFeedback } from './DisplayFeeback'
+import { DisplayFeedback } from './DisplayFeedback'
 
 export const DisplayQuestion = ({setCatID, questIndex, setQuestIndex, score, setScore, questions, category}) => {
 
@@ -23,39 +23,30 @@ export const DisplayQuestion = ({setCatID, questIndex, setQuestIndex, score, set
     let status = ''
 
     // Determines what happens to states when clicking a correct/incorrect answer option
-    const handleClick = (answer) => {
-        if (answer === 'correct') {
+    const checkAns = (option, correctAnswer) => {
+        if (option === correctAnswer) {
             setScore(score+1)
+            status='C'
         }
-        // setQuestIndex(questIndex+1)
+        setFeedback(true)
     }
 
     return(
         <>
-            <div className='title'> 
-                {category} Quiz 
-            </div>
             <div className='score'>
                 Score: {score}
             </div>
             <div className='question'> 
-                Question {questIndex+1}: {question}
+                <span className='question-label'>Question {questIndex+1}:</span> {question}
             </div>
-            {shuffleOptions.map((option) => (
-                // <div onClick={(option === correctAnswer) ? handleClick('correct') : handleClick('incorrect')}>
-                <div onClick={() => {
-                    // setQuestIndex(questIndex+1);
-                    (option === correctAnswer) ? setScore(score + 1) : setScore(score);
-                    (option === correctAnswer) ? status='C' : status='I';
-                    setFeedback(true)
-                }}>
-                    {htmlDecode(option)}
-                </div>
-            ))}
+            <div className='options'>
+                {shuffleOptions.map((option) => (
+                    <button className='option' onClick={() => checkAns(option, correctAnswer)}>
+                        {htmlDecode(option)}
+                    </button>
+                ))}
+            </div>
             {(feedback === true) && <DisplayFeedback status={status} correctAnswer={correctAnswer} questIndex={questIndex} setQuestIndex={setQuestIndex} setFeedback={setFeedback} />}
-            <div>
-                <button onClick={() => {setCatID(null)}}> Return to Categories </button>
-            </div>
         </>
     )
 }

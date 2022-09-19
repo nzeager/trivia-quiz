@@ -2,12 +2,12 @@ export const DisplayFeedback = ({status, correctAnswer, questIndex, setQuestInde
     return(
         <>
             {(status === 'C')
-                ? <div className='feedback'>Correct!</div>
-                : <div className='feedback'>Incorrect!</div>
+                ? <div className='feedback-correct'>Correct</div>
+                : <div className='feedback-incorrect'>Incorrect</div>
             }
-            <div className='correctAnswer'>Correct Answer: {correctAnswer}</div>
+            <div className='correct-answer'>Correct Answer: {correctAnswer}</div>
             <div>
-                <button onClick={() => {
+                <button className='next' onClick={() => {
                     setQuestIndex(questIndex+1);
                     setFeedback(false)
                 }}> Next Question </button>
