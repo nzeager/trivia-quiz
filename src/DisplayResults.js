@@ -12,7 +12,7 @@ export const DisplayResults = ({score, questions}) => {
             <div>
                 {questions.map((question) => (
                     <div className='quest-ans'>
-                        <div><span className='question-label'>Question {questCount}:</span> {htmlDecode(question.question)}</div>
+                        <div><span className='question-label'>Question {questions.indexOf(question) + 1}:</span> {htmlDecode(question.question)}</div>
                         <div><span className='answer-label'>Answer:</span> {htmlDecode(question.correct_answer)} </div>
                     </div>
                 ))}

@@ -30,20 +30,18 @@ export const TakeQuiz = ({catID, setCatID}) => {
                 </h2>
                 { (questIndex < len) 
                     ? <DisplayQuestion 
-                    setCatID={setCatID}
                     questIndex={questIndex}
                     setQuestIndex={setQuestIndex}
                     score={score}
                     setScore={setScore}
-                    questions={questions}
-                    category={category} />
+                    questions={questions} />
                     : <DisplayResults
                     score={score}
                     questions={questions} />
                 }
                 <div className='bottom'>
-                    <button className='quiz-options' onClick={() => {setCatID(null)}}> Select New Quiz Category </button>
-                    <button className='quiz-options' onClick={() => <TakeQuiz catID={catID} setCatID={setCatID} />}> Start New {category} Quiz </button>
+                    <button onClick={() => {setCatID(null)}}> Select New Quiz Category </button>
+                    {/* Future Project: Add button to take a new quiz, same category */}
                 </div>
             </>
         )

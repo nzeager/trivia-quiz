@@ -43,13 +43,13 @@ body {
 .feedback-correct {
   font-weight: bold;
   margin: 1rem;
-  color: green;
+  color: #228B22;
 }
 
 .feedback-incorrect {
   font-weight: bold;
   margin: 1rem;
-  color: red;
+  color: #ff0000;
 }
 
 .correct-answer {
@@ -82,8 +82,5 @@ body {
   position: fixed;
   bottom: 0;
   width: 100%;
-}
-
-.quiz-options {
   margin: 2rem;
 }

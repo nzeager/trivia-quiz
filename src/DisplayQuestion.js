@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { DisplayFeedback } from './DisplayFeedback'
 import { htmlDecode } from './utils'
 
-export const DisplayQuestion = ({setCatID, questIndex, setQuestIndex, score, setScore, questions, category}) => {
+export const DisplayQuestion = ({questIndex, setQuestIndex, score, setScore, questions}) => {
 
     // tracks whether question has been answered to display feedback
     const [feedback, setFeedback] = useState(false)
@@ -20,10 +20,15 @@ export const DisplayQuestion = ({setCatID, questIndex, setQuestIndex, score, set
 
 
     // Determines what happens to states when clicking a correct/incorrect answer option
-    const checkAns = (option, correctAnswer, setIsCorrect) => {
+    const checkAns = (e, option, correctAnswer, setIsCorrect) => {
         if (option === correctAnswer) {
             setScore(score+1)
             setIsCorrect('C')
+            // Future Project: Highlight button red or green after it's been clicked
+            // will have to remove highlight when moving to next question
+            // e.target.style.backgroundColor = '#228B22'
+        } else {
+            // e.target.style.backgroundColor = '#ff0000'
         }
         setFeedback(true)
     }
@@ -38,7 +43,7 @@ export const DisplayQuestion = ({setCatID, questIndex, setQuestIndex, score, set
             </div>
             <div className='options'>
                 {shuffleOptions.map((option) => (
-                    <button className='option' onClick={() => checkAns(option, correctAnswer, setIsCorrect)} disabled={feedback === true}>
+                    <button className='option' onClick={(event) => checkAns(event, option, correctAnswer, setIsCorrect)} disabled={feedback === true}>
                         {htmlDecode(option)}
                     </button>
                 ))}
